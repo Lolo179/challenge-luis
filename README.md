@@ -16,6 +16,7 @@ React single-page application for browsing and purchasing mobile devices. Built 
 - **React 19** - UI framework with functional components and hooks
 - **Vite 8** - Build tool and dev server (Node 24+)
 - **React Router 7** - Client-side routing
+- **Tailwind CSS 4** - Utility-first styling with responsive design
 - **Vitest 4 + React Testing Library** - Unit testing (24 tests)
 - **Playwright** - E2E testing (12 tests)
 - **ESLint** - Code quality checks
@@ -89,7 +90,7 @@ graph LR
 ```bash
 # Install and run
 npm install
-npm run dev    # http://localhost:5173
+npm start    # or npm run dev (http://localhost:5173)
 
 # Testing
 npm run test -- --run       # Unit tests
@@ -110,6 +111,18 @@ npm run build   # Creates dist/
 - **Build** - Vite bundle verification (~78KB gzipped)
 
 All tests pass. CI/CD pipeline enforces checks on every push.
+
+## Design & UX
+
+- **Responsive Layout** - Mobile-first design with Tailwind utility classes
+  - PLP: 2 columns (mobile) → 3 (tablet) → 4 (desktop)
+  - PDP: Single column (mobile) → two columns (md+) for image and specs
+  - Maximum container width on larger screens for readability
+- **Visual Hierarchy** - Clear contrast ratios and typography scale
+  - Slate palette with accent red for CTAs
+  - Loading states with animated spinner
+  - Hover states with smooth transitions (scale, color)
+- **Accessibility** - Semantic HTML, focus states, keyboard navigation
 
 ## API Integration
 

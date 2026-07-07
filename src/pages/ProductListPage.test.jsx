@@ -117,7 +117,7 @@ describe('ProductListPage', () => {
       () => new Promise(() => {}) // nunca resuelve
     )
     renderProductListPage()
-    expect(screen.getByText('Loading...')).toBeInTheDocument()
+    expect(screen.getByText('Loading products...')).toBeInTheDocument()
   })
 
   it('displays error message on API failure', async () => {

@@ -1,20 +1,32 @@
 export default function ProductDescription({ product }) {
+  const specs = [
+    { label: 'Brand', value: product.brand },
+    { label: 'Model', value: product.model },
+    { label: 'Price', value: `${product.price} €` },
+    { label: 'CPU', value: product.cpu },
+    { label: 'RAM', value: product.ram },
+    { label: 'OS', value: product.os },
+    { label: 'Display', value: product.displayResolution },
+    { label: 'Battery', value: product.battery },
+    { label: 'Cameras', value: product.cameras },
+    { label: 'Dimensions', value: product.dimentions },
+    { label: 'Weight', value: product.weight },
+  ]
+
   return (
-    <div className="product-description" data-testid="product-description">
-      <h1>{product.brand} {product.model}</h1>
-      <ul>
-        <li><strong>Brand:</strong> {product.brand}</li>
-        <li><strong>Model:</strong> {product.model}</li>
-        <li><strong>Price:</strong> {product.price} €</li>
-        <li><strong>CPU:</strong> {product.cpu}</li>
-        <li><strong>RAM:</strong> {product.ram}</li>
-        <li><strong>OS:</strong> {product.os}</li>
-        <li><strong>Display resolution:</strong> {product.displayResolution}</li>
-        <li><strong>Battery:</strong> {product.battery}</li>
-        <li><strong>Cameras:</strong> {product.cameras}</li>
-        <li><strong>Dimensions:</strong> {product.dimentions}</li>
-        <li><strong>Weight:</strong> {product.weight}</li>
-      </ul>
+    <div data-testid="product-description">
+      <h1 className="text-2xl font-bold text-slate-900 mb-4">
+        {product.brand} {product.model}
+      </h1>
+      <div className="divide-y divide-slate-100">
+        {specs.map(({ label, value }) => (
+          <div key={label} className="flex justify-between py-2 text-sm">
+            <span className="font-medium text-slate-500 w-28 shrink-0">{label}</span>
+            <span className="text-slate-800 text-right">{value}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
+
