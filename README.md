@@ -37,8 +37,9 @@ npm install
 
 - **`npm run dev`** - Start development server (http://localhost:5173)
 - **`npm run build`** - Build for production
-- **`npm run test`** - Run tests in watch mode
-- **`npm test -- --run`** - Run tests once
+- **`npm run test`** - Run unit tests in watch mode
+- **`npm run test -- --run`** - Run unit tests once
+- **`npm run e2e`** - Run Playwright E2E tests
 - **`npm run lint`** - Check code quality with ESLint
 - **`npm run preview`** - Preview production build locally
 
@@ -82,13 +83,42 @@ The project includes 24 unit tests covering:
 - **Pages** - Data loading, filtering, and error handling
 - **Services** - Cache TTL and localStorage persistence
 
-Run tests with:
+Run unit tests with:
 
 ```bash
 npm run test -- --run
 ```
 
-All tests pass with 100% coverage of core functionality.
+### End-to-End (E2E) Testing
+
+E2E tests with Playwright verify real user workflows:
+
+- Product list loading and display
+- Real-time search filtering by brand/model
+- Navigation to product detail page
+- Adding products to cart with color/storage selection
+- Cart counter updates
+- Button disable state during API requests
+
+Run E2E tests with:
+
+```bash
+npm run e2e
+```
+
+Tests run on Chrome and Firefox browsers (see `playwright.config.js`).
+
+### CI/CD Pipeline
+
+GitHub Actions automatically runs on every push and pull request:
+
+1. **Lint** - ESLint code quality checks
+2. **Unit Tests** - Vitest with jsdom
+3. **Build** - Vite production build verification
+4. **E2E Tests** - Playwright tests on Chrome and Firefox
+5. **Report** - Playwright HTML report stored as artifact
+
+See [`.github/workflows/ci.yml`](.github/workflows/ci.yml) for pipeline configuration.
 
 ## Code Quality
 
