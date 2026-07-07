@@ -14,8 +14,10 @@ export default function ProductActions({ product }) {
   async function handleAddToCart() {
     setAdding(true)
     try {
-      await addToCart({ id, colorCode: selectedColor, storageCode: selectedStorage })
-      updateCartCount(cartCount + 1)
+      const result = await addToCart({ id, colorCode: Number(selectedColor), storageCode: Number(selectedStorage) })
+      updateCartCount(cartCount + result.count)
+    } catch (err) {
+      console.error('[ProductActions] addToCart failed:', err)
     } finally {
       setAdding(false)
     }
