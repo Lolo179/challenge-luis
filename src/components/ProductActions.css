@@ -14,15 +14,17 @@
 .product-actions__group label {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #444;
+  color: #222;
 }
 
 .product-actions__group select {
   padding: 0.45rem 0.6rem;
-  border: 1px solid #ccc;
+  border: 1px solid #aaa;
   border-radius: 6px;
   font-size: 0.9rem;
   max-width: 220px;
+  color: #111;
+  background: #fff;
 }
 
 .product-actions__btn {

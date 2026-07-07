@@ -3,7 +3,6 @@ import { useParams, Link } from 'react-router-dom'
 import { getProductById } from '../api/productApi'
 import ProductDescription from '../components/ProductDescription'
 import ProductActions from '../components/ProductActions'
-import './ProductDetailPage.css'
 
 export default function ProductDetailPage() {
   const { id } = useParams()
@@ -18,19 +17,36 @@ export default function ProductDetailPage() {
       .finally(() => setLoading(false))
   }, [id])
 
-  if (loading) return <p className="page-status">Loading...</p>
-  if (error) return <p className="page-status page-status--error">{error}</p>
+  if (loading) return (
+    <div className="flex flex-col items-center justify-center py-24 gap-3">
+      <div className="w-10 h-10 border-4 border-slate-200 border-t-slate-700 rounded-full animate-spin" />
+      <p className="text-slate-500 text-sm">Loading product...</p>
+    </div>
+  )
+
+  if (error) return (
+    <p className="text-center mt-16 text-red-500">{error}</p>
+  )
 
   return (
-    <main className="product-detail-page">
-      <Link to="/" className="product-detail-page__back">← Back to list</Link>
+    <main className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
+      <Link
+        to="/"
+        className="inline-flex items-center gap-1 text-sm text-slate-500 hover:text-slate-800 transition-colors mb-6"
+      >
+        ← Back to list
+      </Link>
 
-      <div className="product-detail-page__layout">
-        <div className="product-detail-page__image">
-          <img src={product.imgUrl} alt={`${product.brand} ${product.model}`} />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6 flex items-center justify-center">
+          <img
+            src={product.imgUrl}
+            alt={`${product.brand} ${product.model}`}
+            className="w-full max-h-80 object-contain"
+          />
         </div>
 
-        <div className="product-detail-page__info">
+        <div className="bg-white rounded-2xl border border-slate-200 p-6">
           <ProductDescription product={product} />
           <ProductActions product={product} />
         </div>
