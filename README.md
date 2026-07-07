@@ -137,6 +137,19 @@ Run linting with:
 npm run lint
 ```
 
+## CI/CD Pipeline & Branch Protection
+
+The project uses **GitHub Actions** for automated testing on every push and pull request.
+
+**Main branch is protected** - code can only merge if:
+- ✅ ESLint checks pass (no code style violations)
+- ✅ All 24 unit tests pass
+- ✅ All 12 E2E tests pass (Chrome + Firefox)
+- ✅ Production build succeeds
+- ✅ Code is reviewed and approved
+
+See [CI-CD.md](CI-CD.md) for detailed information about the pipeline, branch protection rules, and troubleshooting.
+
 ## Browser Support
 
 Works in all modern browsers that support:
