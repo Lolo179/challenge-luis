@@ -20,7 +20,7 @@ export default function Header() {
       </nav>
 
       <div className="header__cart">
-        Cart: <span>{cartCount}</span>
+        Cart: <span data-testid="cart-count">{cartCount}</span>
       </div>
     </header>
   )

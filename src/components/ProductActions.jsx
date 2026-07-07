@@ -54,6 +54,7 @@ export default function ProductActions({ product }) {
         className="product-actions__btn"
         onClick={handleAddToCart}
         disabled={adding}
+        data-testid="add-to-cart-btn"
       >
         {adding ? 'Adding...' : 'Add to cart'}
       </button>

@@ -1,6 +1,6 @@
 export default function ProductDescription({ product }) {
   return (
-    <div className="product-description">
+    <div className="product-description" data-testid="product-description">
       <h1>{product.brand} {product.model}</h1>
       <ul>
         <li><strong>Brand:</strong> {product.brand}</li>
