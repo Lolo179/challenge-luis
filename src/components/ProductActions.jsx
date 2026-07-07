@@ -15,7 +15,6 @@ export default function ProductActions({ product }) {
     setAdding(true)
     try {
       await addToCart({ id, colorCode: selectedColor, storageCode: selectedStorage })
-      // increment cart count locally since API returns product count, not total
       updateCartCount(cartCount + 1)
     } finally {
       setAdding(false)
