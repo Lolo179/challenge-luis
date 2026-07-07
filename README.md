@@ -51,9 +51,10 @@ src/
 ├── context/          # React Context for global state (CartContext)
 ├── pages/            # Page components (ProductListPage, ProductDetailPage)
 ├── services/         # Business logic (cacheService with 1h TTL)
-├── __fixtures__/     # Test data
-└── __tests__/        # Component tests
+└── __fixtures__/     # Shared test data and fixtures
 ```
+
+Tests are co-located with the files they test (e.g. `components/ProductCard.test.jsx`).
 
 ### Key Patterns
 

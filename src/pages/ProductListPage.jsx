@@ -30,7 +30,7 @@ export default function ProductListPage() {
   return (
     <main className="product-list-page">
       <div className="product-list-page__toolbar">
-        <span>{filtered.length} results</span>
+        <span data-testid="result-count">{filtered.length} results</span>
         <input
           type="search"
           placeholder="Search by brand or model..."
@@ -41,9 +41,15 @@ export default function ProductListPage() {
       </div>
 
       <div className="product-list-page__grid">
-        {filtered.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+        {filtered.length > 0 ? (
+          filtered.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        ) : (
+          <p style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '2rem' }}>
+            No results found
+          </p>
+        )}
       </div>
     </main>
   )
