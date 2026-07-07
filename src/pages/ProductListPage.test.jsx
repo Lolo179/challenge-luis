@@ -5,14 +5,9 @@ import { MemoryRouter } from 'react-router-dom'
 import { CartProvider } from '../context/CartContext'
 import ProductListPage from './ProductListPage'
 import * as productApi from '../api/productApi'
+import { mockProducts } from '../__fixtures__/products'
 
 vi.mock('../api/productApi')
-
-const mockProducts = [
-  { id: '1', brand: 'Apple', model: 'iPhone 14', price: '999', imgUrl: 'https://example.com/1.jpg' },
-  { id: '2', brand: 'Samsung', model: 'Galaxy S22', price: '899', imgUrl: 'https://example.com/2.jpg' },
-  { id: '3', brand: 'Apple', model: 'iPad Pro', price: '1099', imgUrl: 'https://example.com/3.jpg' },
-]
 
 function renderProductListPage() {
   return render(
@@ -33,9 +28,9 @@ describe('ProductListPage', () => {
     renderProductListPage()
     
     await waitFor(() => {
-      expect(screen.getByText('iPhone 14')).toBeInTheDocument()
-      expect(screen.getByText('Galaxy S22')).toBeInTheDocument()
-      expect(screen.getByText('iPad Pro')).toBeInTheDocument()
+      mockProducts.forEach(product => {
+        expect(screen.getByText(product.model)).toBeInTheDocument()
+      })
     })
   })
 
@@ -52,16 +47,29 @@ describe('ProductListPage', () => {
     renderProductListPage()
 
     await waitFor(() => {
-      expect(screen.getByText('iPhone 14')).toBeInTheDocument()
+      expect(screen.getByText(mockProducts[0].model)).toBeInTheDocument()
     })
 
     const searchInput = screen.getByPlaceholderText(/search by brand or model/i)
-    await user.type(searchInput, 'Apple')
+    const brandToSearch = mockProducts[0].brand
+    await user.type(searchInput, brandToSearch)
 
-    expect(screen.getByText('iPhone 14')).toBeInTheDocument()
-    expect(screen.getByText('iPad Pro')).toBeInTheDocument()
-    expect(screen.queryByText('Galaxy S22')).not.toBeInTheDocument()
-    expect(screen.getByText('2 results')).toBeInTheDocument()
+    // should show only products matching the brand
+    mockProducts
+      .filter(p => p.brand === brandToSearch)
+      .forEach(product => {
+        expect(screen.getByText(product.model)).toBeInTheDocument()
+      })
+
+    // should not show products not matching the brand
+    mockProducts
+      .filter(p => p.brand !== brandToSearch)
+      .forEach(product => {
+        expect(screen.queryByText(product.model)).not.toBeInTheDocument()
+      })
+
+    const matchCount = mockProducts.filter(p => p.brand === brandToSearch).length
+    expect(screen.getByText(`${matchCount} results`)).toBeInTheDocument()
   })
 
   it('filters by brand case-insensitive', async () => {
@@ -69,14 +77,21 @@ describe('ProductListPage', () => {
     renderProductListPage()
 
     await waitFor(() => {
-      expect(screen.getByText('Samsung')).toBeInTheDocument()
+      expect(screen.getByText(mockProducts[1].model)).toBeInTheDocument()
     })
 
     const searchInput = screen.getByPlaceholderText(/search by brand or model/i)
-    await user.type(searchInput, 'samsung')
+    const brandToSearch = mockProducts[1].brand.toLowerCase()
+    await user.type(searchInput, brandToSearch)
 
-    expect(screen.getByText('Galaxy S22')).toBeInTheDocument()
-    expect(screen.queryByText('iPhone 14')).not.toBeInTheDocument()
+    const matchingProducts = mockProducts.filter(
+      p => p.brand.toLowerCase() === brandToSearch
+    )
+    matchingProducts.forEach(product => {
+      expect(screen.getByText(product.model)).toBeInTheDocument()
+    })
+
+    expect(screen.getByText(`${matchingProducts.length} results`)).toBeInTheDocument()
   })
 
   it('shows no results when search does not match any product', async () => {
@@ -84,14 +99,17 @@ describe('ProductListPage', () => {
     renderProductListPage()
 
     await waitFor(() => {
-      expect(screen.getByText('3 results')).toBeInTheDocument()
+      expect(screen.getByText(`${mockProducts.length} results`)).toBeInTheDocument()
     })
 
     const searchInput = screen.getByPlaceholderText(/search by brand or model/i)
-    await user.type(searchInput, 'Nokia')
+    const nonexistentQuery = 'XXXXNONEXISTENT'
+    await user.type(searchInput, nonexistentQuery)
 
     expect(screen.getByText('0 results')).toBeInTheDocument()
-    expect(screen.queryByText('iPhone 14')).not.toBeInTheDocument()
+    mockProducts.forEach(product => {
+      expect(screen.queryByText(product.model)).not.toBeInTheDocument()
+    })
   })
 
   it('shows loading state initially', () => {
