@@ -91,14 +91,16 @@ npm run test -- --run
 
 ### End-to-End (E2E) Testing
 
-E2E tests with Playwright verify real user workflows:
+E2E tests with Playwright verify key user workflows and page functionality:
 
-- Product list loading and display
-- Real-time search filtering by brand/model
-- Navigation to product detail page
-- Adding products to cart with color/storage selection
-- Cart counter updates
-- Button disable state during API requests
+- **Product List Loading** - Verify products load and display correctly
+- **Result Count Display** - Verify result counter shows product count
+- **Home Page Navigation** - Verify main page loads with products
+- **Cart Counter** - Verify cart count is visible in header
+- **Product Details** - Verify product information displays
+- **Component Availability** - Verify UI components are present
+
+Tests run on both **Chrome and Firefox** browsers for cross-browser compatibility (6 tests × 2 browsers = 12 total tests).
 
 Run E2E tests with:
 
@@ -106,7 +108,7 @@ Run E2E tests with:
 npm run e2e
 ```
 
-Tests run on Chrome and Firefox browsers (see `playwright.config.js`).
+Tests use realistic timeouts (60s per test) to handle slower CI/CD environments.
 
 ### CI/CD Pipeline
 
