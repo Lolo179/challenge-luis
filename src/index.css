@@ -1,12 +1,1 @@
 @import "tailwindcss";
-
-body {
-  font-family: system-ui, sans-serif;
-  background-color: #f8fafc;
-}
-
-#root {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
