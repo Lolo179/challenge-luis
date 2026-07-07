@@ -5,7 +5,7 @@ import './ProductActions.css'
 
 export default function ProductActions({ product }) {
   const { options, id } = product
-  const { updateCartCount } = useCart()
+  const { cartCount, updateCartCount } = useCart()
 
   const [selectedStorage, setSelectedStorage] = useState(options.storages?.[0]?.code ?? '')
   const [selectedColor, setSelectedColor] = useState(options.colors?.[0]?.code ?? '')
@@ -14,8 +14,9 @@ export default function ProductActions({ product }) {
   async function handleAddToCart() {
     setAdding(true)
     try {
-      const result = await addToCart({ id, colorCode: selectedColor, storageCode: selectedStorage })
-      updateCartCount(result.count)
+      await addToCart({ id, colorCode: selectedColor, storageCode: selectedStorage })
+      // increment cart count locally since API returns product count, not total
+      updateCartCount(cartCount + 1)
     } finally {
       setAdding(false)
     }

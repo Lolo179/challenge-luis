@@ -67,7 +67,7 @@ describe('ProductActions', () => {
     expect(colorSelect).toHaveValue(mockProductDetail.options.colors[1].code)
   })
 
-  it('calls addToCart with selected options when button is clicked', async () => {
+  it('calls addToCart API when button is clicked', async () => {
     const user = userEvent.setup()
     renderProductActions()
 
