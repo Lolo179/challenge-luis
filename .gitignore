@@ -12,6 +12,24 @@ dist
 dist-ssr
 *.local
 
+# Test results and coverage
+test-results/
+playwright-report/
+.nyc_output/
+coverage/
+
+# AI & LLM related
+.copilot/
+*.prompt.md
+.instructions.md
+.agent.md
+.prompt.md
+
+# Environment
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
