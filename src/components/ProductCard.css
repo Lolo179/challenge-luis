@@ -30,17 +30,19 @@
 
 .product-card__brand {
   font-size: 0.75rem;
-  color: #888;
+  color: #555;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .product-card__model {
   font-size: 0.95rem;
   font-weight: 600;
+  color: #111;
 }
 
 .product-card__price {
   font-size: 0.9rem;
-  color: #e63946;
-  font-weight: 500;
+  color: #c0392b;
+  font-weight: 600;
 }
