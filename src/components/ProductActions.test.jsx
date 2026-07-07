@@ -27,8 +27,8 @@ describe('ProductActions', () => {
     const storageSelect = screen.getByLabelText('Storage')
     const colorSelect = screen.getByLabelText('Color')
 
-    expect(storageSelect).toHaveValue(mockProductDetail.options.storages[0].code)
-    expect(colorSelect).toHaveValue(mockProductDetail.options.colors[0].code)
+    expect(storageSelect).toHaveValue(String(mockProductDetail.options.storages[0].code))
+    expect(colorSelect).toHaveValue(String(mockProductDetail.options.colors[0].code))
   })
 
   it('renders all available storage options', () => {
@@ -53,18 +53,18 @@ describe('ProductActions', () => {
     renderProductActions()
 
     const storageSelect = screen.getByLabelText('Storage')
-    fireEvent.change(storageSelect, { target: { value: mockProductDetail.options.storages[1].code } })
+    fireEvent.change(storageSelect, { target: { value: String(mockProductDetail.options.storages[1].code) } })
 
-    expect(storageSelect).toHaveValue(mockProductDetail.options.storages[1].code)
+    expect(storageSelect).toHaveValue(String(mockProductDetail.options.storages[1].code))
   })
 
   it('changes selected color option', async () => {
     renderProductActions()
 
     const colorSelect = screen.getByLabelText('Color')
-    fireEvent.change(colorSelect, { target: { value: mockProductDetail.options.colors[1].code } })
+    fireEvent.change(colorSelect, { target: { value: String(mockProductDetail.options.colors[1].code) } })
 
-    expect(colorSelect).toHaveValue(mockProductDetail.options.colors[1].code)
+    expect(colorSelect).toHaveValue(String(mockProductDetail.options.colors[1].code))
   })
 
   it('calls addToCart API when button is clicked', async () => {
@@ -88,8 +88,8 @@ describe('ProductActions', () => {
     const storageSelect = screen.getByLabelText('Storage')
     const colorSelect = screen.getByLabelText('Color')
 
-    fireEvent.change(storageSelect, { target: { value: mockProductDetail.options.storages[1].code } })
-    fireEvent.change(colorSelect, { target: { value: mockProductDetail.options.colors[1].code } })
+    fireEvent.change(storageSelect, { target: { value: String(mockProductDetail.options.storages[1].code) } })
+    fireEvent.change(colorSelect, { target: { value: String(mockProductDetail.options.colors[1].code) } })
 
     const button = screen.getByRole('button', { name: /add to cart/i })
     await user.click(button)

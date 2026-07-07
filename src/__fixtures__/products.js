@@ -38,12 +38,12 @@ export const mockProductDetail = {
   weight: '172g',
   options: {
     storages: [
-      { code: 'S_128', name: '128GB' },
-      { code: 'S_256', name: '256GB' },
+      { code: 1000, name: '128GB' },
+      { code: 2000, name: '256GB' },
     ],
     colors: [
-      { code: 'C_BLACK', name: 'Black' },
-      { code: 'C_WHITE', name: 'White' },
+      { code: 1000, name: 'Black' },
+      { code: 1001, name: 'White' },
     ],
   },
 }
