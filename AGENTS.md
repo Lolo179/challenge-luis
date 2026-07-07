@@ -19,15 +19,15 @@ The app must provide:
 - Vitest
 - React Testing Library
 - ESLint
+- Tailwind CSS (for styling)
+
 Do not use:
 - TypeScript
-- Redux
-- Zustand
-- Tailwind
-- Material UI
-- Styled Components
+- Redux / Zustand / global state managers
+- Material UI / component libraries
+- Styled Components / CSS-in-JS
 - Next.js
-- Axios unless explicitly decided
+- Axios (use Fetch API)
 ## Architecture
 Use this structure:
 src/
